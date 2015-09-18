@@ -1,18 +1,41 @@
-if (Meteor.isClient) {
-  // counter starts at 0
-  Session.setDefault('counter', 0);
 
-  Template.hello.helpers({
-    counter: function () {
-      return Session.get('counter');
+var Todos = new Mongo.Collection('todos');
+
+if (Meteor.isClient) {
+  
+  Template.body.helpers({
+    todos: function () {
+
+    	return Todos.find();
     }
   });
 
-  Template.hello.events({
-    'click button': function () {
-      // increment the counter when button is clicked
-      Session.set('counter', Session.get('counter') + 1);
-    }
+  Template.body.events({
+  	'submit .new-todo': function (event) {
+  		
+  		var title = event.target.title.value;
+  		Todos.insert({
+          
+          title: title,
+          createdAt: new Date()
+
+  		});
+  		event.target.title.value = "";
+  		return false;
+  	}
+  });
+
+  Template.toDo.events({
+  	'click .check' : function () {
+
+  		Todos.update(this._id, {$set : {checked : !this.checked}});
+
+  	},
+
+  	'click .btn-sm': function () {
+  		
+  		Todos.remove(this._id);
+  	}
   });
 }
 

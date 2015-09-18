@@ -1,14 +1,35 @@
+
 <head>
   <title>meteorApp</title>
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
+	
+<div class="container">	
+	<header>
+		<h1>Daily To do</h1>
+		<form class='new-todo'>
+			<input type="text" name="title" placeholder="New todo item">
+			<input type="submit" value="Add">
+		</form>
+	</header>	
+  <ul class='list-group'>
+ 	
+	{{#each todos}}
 
-  {{> hello}}
+  		{{> toDo}}
+
+  	{{/each}}
+
+  </ul>
+
+ </div>
+
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+
+<template name="toDo">
+	<li class='list-group-item'><input type="checkbox" style="margin-right:5px" checked="{{checked}}" class='check'>{{title}} <button class="btn-sm btn-danger pull-right">remove</button></li>
 </template>

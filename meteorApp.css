@@ -1,1 +1,11 @@
 /* CSS declarations go here */
+
+body {
+
+	background: #f6f6f6;
+}
+
+button.btn-sm.btn-danger {
+
+	padding-top: 0;
+}
