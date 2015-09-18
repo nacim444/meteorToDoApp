@@ -1,13 +1,25 @@
 
-var Todos = new Mongo.Collection('todos');
+Todos = new Mongo.Collection('todos');
+
 
 if (Meteor.isClient) {
   
   Template.body.helpers({
     todos: function () {
+    	if (Session.get("hide")) {
+    		
+    		return Todos.find({checked : {$ne: true}});
+    	}
+    	else {
+    	    return Todos.find();
+             }
+    },
 
-    	return Todos.find();
+    hideFinished : function () {
+
+    	console.log (Session.get("hide"));
     }
+
   });
 
   Template.body.events({
@@ -20,9 +32,14 @@ if (Meteor.isClient) {
           createdAt: new Date()
 
   		});
-  		event.target.title.value = "";
-  		return false;
+  		
+  	},
+  	'change .hide-finished' : function (event) {
+
+  		Session.set("hide",event.target.checked);
   	}
+
+
   });
 
   Template.toDo.events({
@@ -36,6 +53,8 @@ if (Meteor.isClient) {
   		
   		Todos.remove(this._id);
   	}
+
+  	
   });
 }
 

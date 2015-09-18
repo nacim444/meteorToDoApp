@@ -10,9 +10,13 @@
 <div class="container">	
 	<header>
 		<h1>Daily To do</h1>
+		<label class="hide-finished">
+			<input type="checkbox" checked='{{hideFinished}}'>
+			masquer les taches dérminées 
+		</label>
 		<form class='new-todo'>
-			<input type="text" name="title" placeholder="New todo item">
-			<input type="submit" value="Add">
+			<input type="text" name="title" placeholder="Ajouter une tache">
+			<input type="submit" value="Ajouter">
 		</form>
 	</header>	
   <ul class='list-group'>
@@ -31,5 +35,5 @@
 
 
 <template name="toDo">
-	<li class='list-group-item'><input type="checkbox" style="margin-right:5px" checked="{{checked}}" class='check'>{{title}} <button class="btn-sm btn-danger pull-right">remove</button></li>
+	<li class='list-group-item {{#if checked}}checked{{/if}}'><input type="checkbox" style="margin-right:5px" checked="{{checked}}" class='check'>{{title}} <button class="btn-sm btn-danger pull-right">supprimer</button></li>
 </template>
