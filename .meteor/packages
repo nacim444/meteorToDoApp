@@ -11,3 +11,7 @@ insecure
 cryptoquick:stylus-multi
 accounts-password
 accounts-ui
+accounts-twitter
+accounts-facebook
+accounts-google
+accounts-github
